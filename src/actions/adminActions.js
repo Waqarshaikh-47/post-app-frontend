@@ -9,6 +9,7 @@ import { setCurrentUser } from '../reducers/authReducer';
 export const loginAdmin = (adminData, navigate) => async dispatch => {
   try {
     const res = await axios.post('https://post-app-backend-0fex.onrender.com/api/admin/login', adminData);
+    alert('Login successful!');
     const { token } = res.data;
     localStorage.setItem('jwtToken', token);
     setAuthToken(token);
@@ -16,6 +17,7 @@ export const loginAdmin = (adminData, navigate) => async dispatch => {
     dispatch(setCurrentUser(decoded));
     navigate('/admin/users');
   } catch (err) {
+    alert(`Login failed!`);
     console.error(err);
   }
 };
