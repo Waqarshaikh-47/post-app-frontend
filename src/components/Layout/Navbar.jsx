@@ -1,15 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setAuthToken } from '../../utils/setAuthToken';
+import { logoutUser } from '../../actions/authActions';
+import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
   const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Set token on re-render
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
   }
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    alert('Logout successful!');
+    navigate('/')
+  };
 
   const guestLinks = (
     <>
@@ -33,6 +44,9 @@ const Navbar = () => {
       <li className="nav-item">
         <Link className="nav-link" to="/posts/create">Create Post</Link>
       </li>
+      <li className="nav-item">
+        <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
+      </li>
     </>
   );
 
@@ -41,9 +55,9 @@ const Navbar = () => {
       <li className="nav-item">
         <Link className="nav-link" to="/admin/users">Manage Users</Link>
       </li>
-      {/* <li className="nav-item">
-        <Link className="nav-link" to="/admin/dashboard">Dashboard</Link>
-      </li> */}
+      <li className="nav-item">
+        <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
+      </li>
     </>
   );
 

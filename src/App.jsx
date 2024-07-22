@@ -9,7 +9,6 @@ import PostList from './components/Post/PostList';
 import UserList from './components/Admin/UserList';
 import AdminLogin from './components/Auth/AdminLogin';
 import Navbar from './components/Layout/Navbar';
-import AdminDashboard from './components/Admin/AdminDashboard';
 import Home from './components/Home/Home';
 
 
@@ -29,7 +28,6 @@ const App = () => {
           <Route path="/posts/create" element={<CreatePost />} />
           <Route path="/posts" element={<PostList />} />
           <Route path="/admin/users" element={<UserList />} />
-          {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
 
         </Routes>
       </Router>
