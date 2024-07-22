@@ -5,6 +5,8 @@ export const createNewPost = postData => async dispatch => {
   try {
     const res = await axios.post('https://post-app-backend-0fex.onrender.com/api/posts', postData);
     dispatch(createPost(res.data));
+    alert('Post Created Successful!');
+
   } catch (err) {
     console.error(err.response.data);
   }

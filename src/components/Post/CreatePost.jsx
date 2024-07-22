@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createNewPost } from '../../actions/postActions';
+import { useNavigate } from 'react-router-dom';
+
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,8 @@ const CreatePost = () => {
     description: '',
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -18,6 +22,8 @@ const CreatePost = () => {
   const onSubmit = e => {
     e.preventDefault();
     dispatch(createNewPost(formData));
+    navigate('/posts')
+
   };
 
   return (
