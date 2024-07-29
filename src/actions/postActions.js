@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createPost, getPosts } from '../reducers/postReducer';
+import { createPost, getPosts, getUpdatePost , getDeletePost } from '../reducers/postReducer';
 
 export const createNewPost = postData => async dispatch => {
   try {
@@ -20,5 +20,25 @@ export const fetchPosts = (page, limit, search) => async dispatch => {
     dispatch(getPosts(res.data));
   } catch (err) {
     console.error(err.response.data);
+  }
+};
+
+// Delete post
+export const deletePost = (id) => async dispatch => {
+  try {
+    await axios.delete(`https://post-app-backend-0fex.onrender.com/api/posts/${id}`);
+    dispatch(getDeletePost(id));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// Update post
+export const updatePost = (id, postData) => async dispatch => {
+  try {
+    const res = await axios.put(`https://post-app-backend-0fex.onrender.com/api/posts/${id}`, postData);
+    dispatch(getUpdatePost(res.data));
+  } catch (err) {
+    console.error(err);
   }
 };
